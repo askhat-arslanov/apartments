@@ -1,0 +1,8 @@
+.flat-list {
+  margin: 0 auto;
+  max-width: 70rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
