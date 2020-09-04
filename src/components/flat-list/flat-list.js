@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Flat from '../flat'
+import ErrorBoundary from '../error-boundary'
 
 import './flat-list.scss'
 import { withApi } from '../../hoc'
@@ -26,17 +27,13 @@ const FlatList = ({ apiService }) => {
   }, [])
 
   return (
-    <div className="flat-list">
-      {flatList.map(flat => (
-        <Flat key={flat.id} {...flat} />
-      ))}
-      {flatList.map(flat => (
-        <Flat key={flat.id} {...flat} />
-      ))}
-      {flatList.map(flat => (
-        <Flat key={flat.id} {...flat} />
-      ))}
-    </div>
+    <ErrorBoundary>
+      <div className="flat-list">
+        {flatList.map(flat => (
+          <Flat key={flat.id} {...flat} />
+        ))}
+      </div>
+    </ErrorBoundary>
   )
 }
 
