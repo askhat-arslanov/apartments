@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-import Flat from '../flat'
 import ErrorBoundary from '../error-boundary'
-
-import './flat-list.scss'
 import { withApi } from '../../hoc'
+import './flat-list.scss'
+
+import Flat from '../flat'
+import Spinner from '../spinner'
 
 const FlatList = ({ apiService }) => {
   const [flatList, setFlatList] = useState([])
@@ -26,12 +27,20 @@ const FlatList = ({ apiService }) => {
       })
   }, [])
 
+  const getFlatListTemplate = () => {
+    return flatList.map(flat => <Flat key={flat.id} {...flat} />)
+  }
+
   return (
     <ErrorBoundary>
       <div className="flat-list">
-        {flatList.map(flat => (
-          <Flat key={flat.id} {...flat} />
-        ))}
+        {isFetching ? (
+          <div className="flat-list__spinner-wrapper">
+            <Spinner />
+          </div>
+        ) : (
+          getFlatListTemplate()
+        )}
       </div>
     </ErrorBoundary>
   )
